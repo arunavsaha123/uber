@@ -38,4 +38,17 @@ module.exports.loginUser = async (req, res, next) => {
     if (!user) {
         return res.status(401).json({ error: 'Invalid email or password' });
     }
+
+    const isMatch = await user.comparePassword(password);
+    
+    if (!isMatch) {
+        return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    const token = user.generateAuthToken();
+    res.status(200).json({token,user});
 }
+
+module.exports.getUserProfile = async (req, res, next) => {
+    
+};
