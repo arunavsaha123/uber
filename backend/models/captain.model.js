@@ -19,7 +19,6 @@ const captainSchema = new mongoose.Schema({
         required: true,
         unique: true,
         lowercase: true,
-        match: [/^\w+$/, 'please enter a valid email address']
     },
     password: {
         type: String,
@@ -36,10 +35,10 @@ const captainSchema = new mongoose.Schema({
         default: 'inactive'
     },
     vehicle: {
-        colour: {
+        color: {
             type: String,
             required: true,
-            minlength: [3, 'colour must be atleast 3 characters long']
+            minlength: [3, 'color must be atleast 3 characters long']
         },
         plate: {
             type: String,
@@ -68,7 +67,7 @@ const captainSchema = new mongoose.Schema({
 });
 
 captainSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresin: '24h' });
+    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     return token;
 }
 
